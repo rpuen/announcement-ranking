@@ -1,13 +1,13 @@
-package com.juniordev.idealista.ranking.announcementranking;
+package com.idealista.ranking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class AnnouncementRankingApplication {
+public class Application {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AnnouncementRankingApplication.class, args);
+		SpringApplication.run(Application.class, args);
 	}
 
 }
