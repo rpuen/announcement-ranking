@@ -10,25 +10,30 @@ import org.springframework.web.bind.annotation.RestController;
 import com.idealista.ranking.exception.AnnouncementNotFoundException;
 import com.idealista.ranking.model.Announcement;
 import com.idealista.ranking.model.AnnouncementRepository;
-import com.idealista.ranking.model.PictureRepository;
 
 @RestController
 public class AnnouncementController {
 
 	private final AnnouncementRepository repo;
-	private final PictureRepository picRepo;
 
-	public AnnouncementController(AnnouncementRepository repo, PictureRepository picRepo) {
+	public AnnouncementController(AnnouncementRepository repo) {
 		this.repo = repo;
-		this.picRepo=picRepo;
 	}
 
+	/**
+	 * Método que devuelve todos los anuncios ordenados por ID
+	 * @return List<Announcements>
+	 */
 	@GetMapping("/announcements")
 	public List<Announcement> all(){
 		return repo.findAll();
 	}
 
-	
+	/**
+	 * Método que devuelve el anuncio cuyo id se pasa como parámetro
+	 * @param id
+	 * @return
+	 */
 	@GetMapping("/announcements/{id}")
 	public Announcement one(@PathVariable Long id) {
 
@@ -36,10 +41,25 @@ public class AnnouncementController {
 				.orElseThrow(() -> new AnnouncementNotFoundException(id));
 	}
 
+	/**
+	 * Método que devuelve todos los anuncios irrelevantes para el encargado de calidad
+	 * @return
+	 */
 	@GetMapping("/admin/announcements")
 	public List<Announcement> allIrrelevants() {
 		return repo.findAll().stream()
 				.filter(announce -> announce.getScore()<40)
+				.collect(Collectors.toList());
+	}
+	
+	/**
+	 * Método que devuelve los anuncios relevantes para los usuarios
+	 * @return
+	 */
+	@GetMapping("/user/announcements")
+	public List<Announcement> allRelevants(){
+		return repo.findAllByOrderByScoreDesc().stream()
+				.filter(announce -> announce.getScore()>40)
 				.collect(Collectors.toList());
 	}
 	
@@ -72,4 +92,5 @@ public class AnnouncementController {
 		return repo.save(newAnnouncement);
 	}
 */
+	
 }

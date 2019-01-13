@@ -12,6 +12,8 @@ import javax.persistence.ManyToMany;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 
+import com.idealista.ranking.model.enums.Typology;
+
 import lombok.Data;
 
 @Data

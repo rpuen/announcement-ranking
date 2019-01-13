@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.idealista.ranking.model.Announcement;
-import com.idealista.ranking.model.AnnouncementService;
 import com.idealista.ranking.model.Picture;
 import com.idealista.ranking.model.PictureRepository;
-import com.idealista.ranking.model.Quality;
-import com.idealista.ranking.model.Typology;
+import com.idealista.ranking.model.enums.Quality;
+import com.idealista.ranking.model.enums.Typology;
+import com.idealista.ranking.service.AnnouncementService;
 
 import lombok.extern.slf4j.Slf4j;
 

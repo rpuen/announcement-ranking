@@ -4,6 +4,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import com.idealista.ranking.model.enums.Quality;
+
 import lombok.Data;
 
 @Entity

@@ -1,9 +1,14 @@
-package com.idealista.ranking.model;
+package com.idealista.ranking.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.idealista.ranking.model.Announcement;
+import com.idealista.ranking.model.AnnouncementRepository;
+import com.idealista.ranking.model.enums.Quality;
+import com.idealista.ranking.model.enums.Typology;
 
 @Service
 public class AnnouncementService {
@@ -31,11 +36,11 @@ public class AnnouncementService {
 		if (announcement.getScore() > 100)
 			announcement.setScore(100);
 	}
-	
+
 	public void completionScore(Announcement announcement) {
 		if (announcement.getDescription() != "" &&
 				!(announcement.getPictures() == null)) {
-			
+
 			if (announcement.getTypology() == Typology.FLAT && 
 					announcement.getHouseSize() != 0)
 				announcement.setScore(announcement.getScore()+40);
@@ -87,17 +92,16 @@ public class AnnouncementService {
 	public void picturesScore(Announcement announcement) {
 		if (announcement.getPictures() == null) {
 			announcement.setScore(announcement.getScore()-10);
-		} 
+		}
 		else {
 			announcement.getPictures().stream()
-			.map(picture -> {
+			.forEach(picture -> {
 				if(picture.getQuality().equals(Quality.SD)) {
 					announcement.setScore(announcement.getScore()+10);
 				} else {
 					announcement.setScore(announcement.getScore()+20);
 				}
-				return announcement;
-				});
+			});
 		}
 	}
 }
