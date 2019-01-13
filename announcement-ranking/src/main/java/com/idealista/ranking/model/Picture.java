@@ -14,10 +14,11 @@ public class Picture {
 	@GeneratedValue
 	private Long id;
 	private String url;
-	private String quality;
+	private Quality quality;
 	
+	public Picture() {}
 	
-	public Picture (String url, String quality) {
+	public Picture (String url, Quality quality) {
 		this.url=url;
 		this.quality=quality;
 	}

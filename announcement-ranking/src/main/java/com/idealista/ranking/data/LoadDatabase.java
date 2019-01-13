@@ -1,13 +1,17 @@
 package com.idealista.ranking.data;
 
+import java.util.Arrays;
+
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 import com.idealista.ranking.model.Announcement;
-import com.idealista.ranking.model.AnnouncementRepository;
+import com.idealista.ranking.model.AnnouncementService;
 import com.idealista.ranking.model.Picture;
 import com.idealista.ranking.model.PictureRepository;
+import com.idealista.ranking.model.Quality;
+import com.idealista.ranking.model.Typology;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -15,96 +19,109 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class LoadDatabase {
 
-	private String desc1 = "Este piso es una ganga, compra, compra, COMPRA!!!!!";
-	private String typo1 = "CHALET";
-	private int size1 = 300;
-	private int garden1;
-	private int[] pict1 = null;
-
-	private String desc2 = "Nuevo ático céntrico recién reformado. No deje pasar la oportunidad y adquiera este ático de lujo";
-	private String typo2 = "FLAT";
-	private int size2;
-	private int garden2;
-	private int[] pict2 = new int[] {4};
-
-	private String desc3 = "";
-	private String typo3 = "CHALET";
-	private int size3 = 210;
-	private int garden3 = 25;
-	private int[] pict3 = new int[] {2};
-
-	private String desc4 = "Ático céntrico muy luminoso y recién reformado, parece nuevo";
-	private String typo4 = "FLAT";
-	private int size4 = 130;
-	private int garden4;
-	private int[] pict4 = new int[] {5};
-
-	private String desc5 = "Pisazo";
-	private String typo5 = "FLAT";
-	private int size5 = 130;
-	private int garden5;
-	private int[] pict5 = new int[] {3,4};
-
-	private String desc6 = "";
-	private String typo6 = "GARAGE";
-	private int size6;
-	private int garden6;
-	private int[] pict6 = new int [] {6};
-
-	private String desc7 = "Garage en el centro de Albacete";
-	private String typo7 = "GARAGE";
-	private int size7 = 300;
-	private int garden7;
-	private int[] pict7 = null;
-
-	private String desc8 = "Maravilloso chalet situado en als afueras de un pequeño pueblo rural. "
-			+ "El entorno es espectacular, las vistas magníficas. ¡Cómprelo ahora!";
-	private String typo8 = "CHALET";
-	private int size8 = 150;
-	private int garden8 = 20;
-	private int[] pict8 = new int [] {1,7};
-
-	private String url1 = "https://www.idealista.com/pictures/1";
-	private String qual1 = "SD";
+	private Picture pic1 = new Picture(
+			"https://www.idealista.com/pictures/1",
+			Quality.SD
+			);
 	
-	private String url2 = "https://www.idealista.com/pictures/2";
-	private String qual2 = "HD";
+	private Picture pic2 = new Picture(
+			"https://www.idealista.com/pictures/2",
+			Quality.HD
+			);
 	
-	private String url3 = "https://www.idealista.com/pictures/3";
-	private String qual3 = "SD";
+	private Picture pic3 = new Picture(
+			"https://www.idealista.com/pictures/3",
+			Quality.SD
+			);
 	
-	private String url4 = "https://www.idealista.com/pictures/4";
-	private String qual4 = "HD";
+	private Picture pic4 = new Picture(
+			"https://www.idealista.com/pictures/4",
+			Quality.HD
+			);
 	
-	private String url5 = "https://www.idealista.com/pictures/5";
-	private String qual5 = "SD";
+	private Picture pic5 = new Picture(
+			"https://www.idealista.com/pictures/5",
+			Quality.SD
+			);
 	
-	private String url6 = "https://www.idealista.com/pictures/6";
-	private String qual6 = "SD";
+	private Picture pic6 = new Picture(
+			"https://www.idealista.com/pictures/6",
+			Quality.SD
+			);
 	
-	private String url7 = "https://www.idealista.com/pictures/7";
-	private String qual7 = "SD";
+	private Picture pic7 = new Picture(
+			"https://www.idealista.com/pictures/7",
+			Quality.SD
+			);
 	
+	private Announcement anun1 = new Announcement(
+			"Este piso es una ganga, compra, compra, COMPRA!!!!!",
+			Typology.CHALET,
+			300,
+			0,
+			null);
+
+	private Announcement anun2 = new Announcement(
+			"Nuevo ático céntrico recién reformado. No deje pasar la oportunidad y adquiera este ático de lujo",
+			Typology.FLAT,
+			0,
+			0,
+			Arrays.asList(new Picture[] {pic4}));
+
+	private Announcement anun3 = new Announcement(
+			"",
+			Typology.CHALET,
+			210,
+			25,
+			Arrays.asList(new Picture[] {pic2}));
+
+	private Announcement anun4 = new Announcement(
+			"Ático céntrico muy luminoso y recién reformado, parece nuevo", 
+			Typology.FLAT, 
+			130, 
+			0,
+			Arrays.asList(new Picture[] {pic5}));
+
+	private Announcement anun5 = new Announcement(
+			"Pisazo",
+			Typology.FLAT, 
+			130,
+			0,
+			Arrays.asList(new Picture[] {pic3, pic4}));
+
+	private Announcement anun6 = new Announcement(
+			"",
+			Typology.GARAGE,
+			0, 
+			0,
+			Arrays.asList(new Picture [] {pic6}));
+
+	private Announcement anun7 = new Announcement(
+			"Garage en el centro de Albacete",
+			Typology.GARAGE,
+			300, 
+			0,
+			null);
 	
+	private Announcement anun8 = new Announcement(
+			"Maravilloso chalet situado en als afueras de un pequeño pueblo rural."  
+			+ "El entorno es espectacular, las vistas magníficas. ¡Cómprelo ahora!", 
+			Typology.CHALET,
+			150,
+			20, 
+			Arrays.asList(new Picture [] {pic1, pic7}));
+
 	@Bean
-	CommandLineRunner initDatabase(AnnouncementRepository repo, PictureRepository picRepo) {
+	CommandLineRunner initDatabase(AnnouncementService repo, PictureRepository picRepo) {
 		return args -> {
-			log.info("Preloading announcement:" + repo.save(new Announcement(desc1, typo1, size1, garden1, pict1)));
-			log.info("Preloading announcement:" + repo.save(new Announcement(desc2, typo2, size2, garden2, pict2)));
-			log.info("Preloading announcement:" + repo.save(new Announcement(desc3, typo3, size3, garden3, pict3)));
-			log.info("Preloading announcement:" + repo.save(new Announcement(desc4, typo4, size4, garden4, pict4)));
-			log.info("Preloading announcement:" + repo.save(new Announcement(desc5, typo5, size5, garden5, pict5)));
-			log.info("Preloading announcement:" + repo.save(new Announcement(desc6, typo6, size6, garden6, pict6)));
-			log.info("Preloading announcement:" + repo.save(new Announcement(desc7, typo7, size7, garden7, pict7)));
-			log.info("Preloading announcement:" + repo.save(new Announcement(desc8, typo8, size8, garden8, pict8)));
-			
-			log.info("Preloading picture:" + picRepo.save(new Picture(url1, qual1)));
-			log.info("Preloading picture:" + picRepo.save(new Picture(url2, qual2)));
-			log.info("Preloading picture:" + picRepo.save(new Picture(url3, qual3)));
-			log.info("Preloading picture:" + picRepo.save(new Picture(url4, qual4)));
-			log.info("Preloading picture:" + picRepo.save(new Picture(url5, qual5)));
-			log.info("Preloading picture:" + picRepo.save(new Picture(url6, qual6)));
-			log.info("Preloading picture:" + picRepo.save(new Picture(url7, qual7)));
+			log.info("Preloading picture:" + picRepo.save(pic1));
+			log.info("Preloading picture:" + picRepo.save(pic2));
+			log.info("Preloading picture:" + picRepo.save(pic3));
+			log.info("Preloading picture:" + picRepo.save(pic4));
+			log.info("Preloading picture:" + picRepo.save(pic5));
+			log.info("Preloading picture:" + picRepo.save(pic6));
+			log.info("Preloading picture:" + picRepo.save(pic7));
+			repo.save(Arrays.asList(new Announcement [] {anun1, anun2, anun3, anun4, anun5, anun6, anun7, anun8}));
 		};
 	}
 }
