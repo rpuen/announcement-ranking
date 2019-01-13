@@ -13,15 +13,16 @@ public class Announcement {
 	@Id
 	@GeneratedValue
 	private Long id;
+	private int score;
 	private String description;
 	private String typology;
 	private int houseSize;
 	private int gardenSize;
-	private int [] pictures;
+	private Long [] pictures;
 	
 	public Announcement() {}
 	
-	public Announcement (String description, String typology, int houseSize, int gardenSize, int [] pictures){
+	public Announcement (String description, String typology, int houseSize, int gardenSize, Long [] pictures){
 		this.description = description;
 		this.typology = typology;
 		this.houseSize = houseSize;
@@ -36,7 +37,7 @@ public class Announcement {
 		this.gardenSize = gardenSize;
 	}
 	
-	public Announcement (String description, String typology, int houseSize, int [] pictures){
+	public Announcement (String description, String typology, int houseSize, Long [] pictures){
 		this.description = description;
 		this.typology = typology;
 		this.houseSize = houseSize;

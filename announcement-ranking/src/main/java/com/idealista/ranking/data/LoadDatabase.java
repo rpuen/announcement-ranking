@@ -6,6 +6,8 @@ import org.springframework.context.annotation.Configuration;
 
 import com.idealista.ranking.model.Announcement;
 import com.idealista.ranking.model.AnnouncementRepository;
+import com.idealista.ranking.model.Picture;
+import com.idealista.ranking.model.PictureRepository;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -62,17 +64,47 @@ public class LoadDatabase {
 	private int garden8 = 20;
 	private int[] pict8 = new int [] {1,7};
 
+	private String url1 = "https://www.idealista.com/pictures/1";
+	private String qual1 = "SD";
+	
+	private String url2 = "https://www.idealista.com/pictures/2";
+	private String qual2 = "HD";
+	
+	private String url3 = "https://www.idealista.com/pictures/3";
+	private String qual3 = "SD";
+	
+	private String url4 = "https://www.idealista.com/pictures/4";
+	private String qual4 = "HD";
+	
+	private String url5 = "https://www.idealista.com/pictures/5";
+	private String qual5 = "SD";
+	
+	private String url6 = "https://www.idealista.com/pictures/6";
+	private String qual6 = "SD";
+	
+	private String url7 = "https://www.idealista.com/pictures/7";
+	private String qual7 = "SD";
+	
+	
 	@Bean
-	CommandLineRunner initDatabase(AnnouncementRepository repo) {
+	CommandLineRunner initDatabase(AnnouncementRepository repo, PictureRepository picRepo) {
 		return args -> {
-			log.info("Preloading" + repo.save(new Announcement(desc1, typo1, size1, garden1, pict1)));
-			log.info("Preloading" + repo.save(new Announcement(desc2, typo2, size2, garden2, pict2)));
-			log.info("Preloading" + repo.save(new Announcement(desc3, typo3, size3, garden3, pict3)));
-			log.info("Preloading" + repo.save(new Announcement(desc4, typo4, size4, garden4, pict4)));
-			log.info("Preloading" + repo.save(new Announcement(desc5, typo5, size5, garden5, pict5)));
-			log.info("Preloading" + repo.save(new Announcement(desc6, typo6, size6, garden6, pict6)));
-			log.info("Preloading" + repo.save(new Announcement(desc7, typo7, size7, garden7, pict7)));
-			log.info("Preloading" + repo.save(new Announcement(desc8, typo8, size8, garden8, pict8)));
+			log.info("Preloading announcement:" + repo.save(new Announcement(desc1, typo1, size1, garden1, pict1)));
+			log.info("Preloading announcement:" + repo.save(new Announcement(desc2, typo2, size2, garden2, pict2)));
+			log.info("Preloading announcement:" + repo.save(new Announcement(desc3, typo3, size3, garden3, pict3)));
+			log.info("Preloading announcement:" + repo.save(new Announcement(desc4, typo4, size4, garden4, pict4)));
+			log.info("Preloading announcement:" + repo.save(new Announcement(desc5, typo5, size5, garden5, pict5)));
+			log.info("Preloading announcement:" + repo.save(new Announcement(desc6, typo6, size6, garden6, pict6)));
+			log.info("Preloading announcement:" + repo.save(new Announcement(desc7, typo7, size7, garden7, pict7)));
+			log.info("Preloading announcement:" + repo.save(new Announcement(desc8, typo8, size8, garden8, pict8)));
+			
+			log.info("Preloading picture:" + picRepo.save(new Picture(url1, qual1)));
+			log.info("Preloading picture:" + picRepo.save(new Picture(url2, qual2)));
+			log.info("Preloading picture:" + picRepo.save(new Picture(url3, qual3)));
+			log.info("Preloading picture:" + picRepo.save(new Picture(url4, qual4)));
+			log.info("Preloading picture:" + picRepo.save(new Picture(url5, qual5)));
+			log.info("Preloading picture:" + picRepo.save(new Picture(url6, qual6)));
+			log.info("Preloading picture:" + picRepo.save(new Picture(url7, qual7)));
 		};
 	}
 }

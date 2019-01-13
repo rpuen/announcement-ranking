@@ -1,4 +1,4 @@
-package com.juniordev.idealista.ranking.announcementranking;
+package com.idealista.ranking;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
