@@ -1,13 +1,13 @@
 package com.idealista.ranking.controller;
 
-import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.linkTo;
+import static org.springframework.hateoas.mvc.ControllerLinkBuilder.methodOn;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.Resources;
-import org.springframework.hateoas.mvc.ControllerLinkBuilder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -60,7 +60,7 @@ public class AnnouncementController {
 	 * @param id
 	 * @return
 	 */
-	@RequestMapping(value = "/announcements/{id}", method = RequestMethod.GET)
+	@GetMapping("/announcements/{id}")
 	public Resource<Announcement> one(@PathVariable Long id) {
 
 		Announcement announcement = repo.findById(id)
@@ -75,10 +75,15 @@ public class AnnouncementController {
 	 * @return
 	 */
 	@GetMapping("/admin/announcements")
-	public List<Announcement> allIrrelevants() {
-		return repo.findAllByOrderByCreationDate().stream()
-				.filter(announce -> announce.getScore()<40)
+	public Resources<Resource<Announcement>> allIrrelevants() {
+		
+		List<Resource<Announcement>> announcements = repo.findAllByOrderByCreationDate().stream()
+				.filter(announcement -> announcement.getScore() < 40)
+				.map(assembler :: toResource)
 				.collect(Collectors.toList());
+		
+		return new Resources<> (announcements,
+				linkTo(methodOn(AnnouncementController.class).allIrrelevants()).withSelfRel());
 	}
 	
 	/**
@@ -87,10 +92,15 @@ public class AnnouncementController {
 	 * @return
 	 */
 	@GetMapping("/user/announcements")
-	public List<Announcement> allRelevants(){
-		return repo.findAllByOrderByScoreDesc().stream()
-				.filter(announce -> announce.getScore()>40)
+	public Resources<Resource<Announcement>> allRelevants(){
+		
+		List<Resource<Announcement>> announcements = repo.findAllByOrderByScoreDesc().stream()
+				.filter(announce -> announce.getScore() > 40)
+				.map(assembler :: toResource)
 				.collect(Collectors.toList());
+		
+		return new Resources<> (announcements,
+				linkTo(methodOn(AnnouncementController.class).allIrrelevants()).withSelfRel());
 	}
 	
 	
