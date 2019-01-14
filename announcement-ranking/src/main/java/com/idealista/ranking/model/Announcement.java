@@ -1,28 +1,36 @@
 package com.idealista.ranking.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.TemporalType;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
+
+import org.hibernate.validator.constraints.br.TituloEleitoral;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.jpa.repository.Temporal;
 
 import com.idealista.ranking.model.enums.Typology;
 
 import lombok.Data;
 
-@Data
 @Entity
+@Data
 public class Announcement {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
 	@Min(value = 0)
 	@Max(value = 100)
 	private int score;
@@ -30,9 +38,15 @@ public class Announcement {
 	private Typology typology;
 	private int houseSize;
 	private int gardenSize;
+	
 	@ManyToMany(fetch = FetchType.EAGER,
 			cascade = { CascadeType.MERGE, CascadeType.REFRESH })
 	private List<Picture> pictures;
+	
+	@CreatedDate
+	private Date creationDate;
+	
+
 	
 	public Announcement() {}
 	
@@ -43,4 +57,5 @@ public class Announcement {
 		this.gardenSize = gardenSize;
 		this.pictures = pictures;
 	}
+	
 }

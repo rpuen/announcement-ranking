@@ -1,5 +1,6 @@
 package com.idealista.ranking.service;
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,15 @@ public class AnnouncementService {
 			keywordsScore(announcement);	
 			completionScore(announcement);
 			scoreAdjust(announcement);
+			announcement.setCreationDate(new Date());
 			repo.save(announcement);
 		});
 	}
 
+	/**
+	 * Función que ajusta la puntuación, entre 0 y 100
+	 * @param announcement
+	 */
 	public void scoreAdjust(Announcement announcement) {
 		if (announcement.getScore() < 0)
 			announcement.setScore(0);
@@ -37,6 +43,10 @@ public class AnnouncementService {
 			announcement.setScore(100);
 	}
 
+	/**
+	 * Función que evalúa la complitud de un anuncio
+	 * @param announcement
+	 */
 	public void completionScore(Announcement announcement) {
 		if (announcement.getDescription() != "" &&
 				!(announcement.getPictures() == null)) {
@@ -54,6 +64,10 @@ public class AnnouncementService {
 			announcement.setScore(announcement.getScore()+40);
 	}
 
+	/**
+	 * Función que evalúa si el anuncio contiene ciertas palabras clave
+	 * @param announcement
+	 */
 	public void keywordsScore(Announcement announcement) {
 		if (announcement.getDescription().toLowerCase().contains("luminoso"))
 			announcement.setScore(announcement.getScore()+5);
@@ -67,6 +81,10 @@ public class AnnouncementService {
 			announcement.setScore(announcement.getScore()+5);
 	}
 
+	/**
+	 * Fución que evalúa la descripción de un anuncio tipo Chalet
+	 * @param announcement
+	 */
 	public void chaletDescription(Announcement announcement) {
 		if (announcement.getTypology() == Typology.CHALET) {
 			if (announcement.getDescription().length() > 50)
@@ -74,6 +92,10 @@ public class AnnouncementService {
 		}
 	}
 
+	/**
+	 * Fución que evalúa la descripción de un anuncio tipo Flat
+	 * @param announcement
+	 */
 	public void flatDescription(Announcement announcement) {
 		if (announcement.getTypology() == Typology.FLAT) {
 			if (announcement.getDescription().length() >= 20 && announcement.getDescription().length() < 50) {
@@ -84,11 +106,19 @@ public class AnnouncementService {
 		}
 	}
 
+	/**
+	 * Fución que evalúa que un anuncio tenga descripción
+	 * @param announcement
+	 */
 	public void isDescription(Announcement announcement) {
 		if (announcement.getDescription() != "")
 			announcement.setScore(announcement.getScore()+5);
 	}
 
+	/**
+	 * Función que evalúa las imágenes de un anuncio, así como su calidad
+	 * @param announcement
+	 */
 	public void picturesScore(Announcement announcement) {
 		if (announcement.getPictures() == null) {
 			announcement.setScore(announcement.getScore()-10);
@@ -103,5 +133,18 @@ public class AnnouncementService {
 				}
 			});
 		}
+	}
+
+	public Announcement saveOne(Announcement announcement) {
+		picturesScore(announcement);
+		isDescription(announcement);
+		flatDescription(announcement);		
+		chaletDescription(announcement);
+		keywordsScore(announcement);	
+		completionScore(announcement);
+		scoreAdjust(announcement);
+		announcement.setCreationDate(new Date());
+		repo.save(announcement);
+		return announcement;
 	}
 }

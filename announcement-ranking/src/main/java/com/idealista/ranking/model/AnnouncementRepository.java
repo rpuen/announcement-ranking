@@ -8,4 +8,6 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Long
 
 	public List<Announcement> findAllByOrderByScoreDesc();
 	
+	public List<Announcement> findAllByOrderByCreationDate();
+	
 }
