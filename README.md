@@ -6,7 +6,7 @@ Setting up:
 - mvn clean package
 - java -jar target/announcement-ranking-0.0.1-SNAPSHOT.jar
 
-#URLS:
+URLS:
 - localhost:8080/announcements -> For quality manager, list of all the announcements
 - localhost:8080/admin/announcements -> For quality manager, list of all irrelevants announcements
 - localhost:8080/user/announcements -> For the customer, list of all relevants announcements sorted by score from greater to lower score
