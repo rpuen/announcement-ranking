@@ -1,4 +1,4 @@
-package com.idealista.ranking;
+package com.newhome.ranking;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

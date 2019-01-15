@@ -1,4 +1,4 @@
-package com.idealista.ranking;
+package com.newhome.ranking;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

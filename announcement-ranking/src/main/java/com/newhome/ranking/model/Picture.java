@@ -1,10 +1,10 @@
-package com.idealista.ranking.model;
+package com.newhome.ranking.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
-import com.idealista.ranking.model.enums.Quality;
+import com.newhome.ranking.model.enums.Quality;
 
 import lombok.Data;
 

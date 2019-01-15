@@ -1,4 +1,4 @@
-package com.idealista.ranking.exception;
+package com.newhome.ranking.exception;
 
 public class AnnouncementNotFoundException extends RuntimeException {
 

@@ -1,4 +1,4 @@
-package com.idealista.ranking.model;
+package com.newhome.ranking.model;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -1,4 +1,4 @@
-package com.idealista.ranking.model.enums;
+package com.newhome.ranking.model.enums;
 
 public enum Typology {
 

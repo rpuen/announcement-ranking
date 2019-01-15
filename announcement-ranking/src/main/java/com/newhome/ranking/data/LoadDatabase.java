@@ -1,4 +1,4 @@
-package com.idealista.ranking.data;
+package com.newhome.ranking.data;
 
 import java.util.Arrays;
 
@@ -6,12 +6,12 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.idealista.ranking.model.Announcement;
-import com.idealista.ranking.model.Picture;
-import com.idealista.ranking.model.PictureRepository;
-import com.idealista.ranking.model.enums.Quality;
-import com.idealista.ranking.model.enums.Typology;
-import com.idealista.ranking.service.AnnouncementService;
+import com.newhome.ranking.model.Announcement;
+import com.newhome.ranking.model.Picture;
+import com.newhome.ranking.model.PictureRepository;
+import com.newhome.ranking.model.enums.Quality;
+import com.newhome.ranking.model.enums.Typology;
+import com.newhome.ranking.service.AnnouncementService;
 
 import lombok.extern.slf4j.Slf4j;
 
